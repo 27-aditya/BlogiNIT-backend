@@ -8,4 +8,12 @@ const createComment = async (postId, userId, content) => {
     return result.rows[0];
 };
 
-module.exports = { createComment };
+const getCommentsByPostId = async (postId) => {
+    const result = await pool.query(
+        'SELECT * FROM comments WHERE post_id = $1 ORDER BY timestamp ASC',
+        [postId]
+    );
+    return result.rows;
+};
+
+module.exports = { createComment, getCommentsByPostId };

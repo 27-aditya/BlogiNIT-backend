@@ -16,4 +16,19 @@ const updatePost = async (postId, authorId, title, content) => {
     return result.rows[0];
 };
 
-module.exports = { createPost, updatePost };
+const getPostById = async (postId) => {
+    const result = await pool.query('SELECT * FROM posts WHERE post_id = $1', [postId]);
+    return result.rows[0];
+};
+
+const getAllPosts = async () => {
+    const result = await pool.query('SELECT * FROM posts ORDER BY timestamp DESC');
+    return result.rows;
+};
+
+const getAllPostsByUser = async (userId) => {
+    const result = await pool.query('SELECT * FROM posts WHERE author_id = $1 ORDER BY timestamp DESC', [userId]);
+    return result.rows;
+};
+
+module.exports = { createPost, updatePost, getPostById, getAllPosts, getAllPostsByUser };
