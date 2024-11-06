@@ -1,5 +1,7 @@
 const express = require('express');
 const passport = require('passport');
+const app = express();
+const cors = require('cors');
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const userDb = require('./models/User');
@@ -15,9 +17,19 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.status(200).json({ message: "The server is running" });
 });
+const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+}));
+
+app.use(express.json());
+>>>>>>> main
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 
 // Register Route
@@ -170,3 +182,11 @@ app.post('/post/:postId/comments', passport.authenticate('jwt', { session: false
         res.status(500).json({ message: 'Error adding comment' });
     }
 });
+=======
+app.get('/', (req, res) => {
+    res.status(200).json({message: "The server is running"});
+})
+
+app.use('/posts', postRoutes);
+app.use('/comments', commentRoutes);
+>>>>>>> main
