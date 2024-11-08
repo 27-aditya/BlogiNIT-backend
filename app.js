@@ -7,30 +7,22 @@ const bcrypt = require('bcryptjs');
 const userDb = require('./models/User');
 const commentDb = require( './models/Comment' );
 const postDb = require( './models/Post' );
-
 const { generateToken } = require('./config/passport');
-
-const app = express();
-
-app.use(express.json()); 
-
-app.get('/', (req, res) => {
-    res.status(200).json({ message: "The server is running" });
-});
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
+const PORT = 3000;
+
+app.use(express.json()); 
 
 app.use(cors({
     origin: 'http://localhost:5173',
 }));
 
-app.use(express.json());
->>>>>>> main
+app.get('/', (req, res) => {
+    res.status(200).json({ message: "The server is running" });
+});
 
-const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
 
 // Register Route
 app.post('/register', async (req, res) => {
@@ -182,11 +174,10 @@ app.post('/post/:postId/comments', passport.authenticate('jwt', { session: false
         res.status(500).json({ message: 'Error adding comment' });
     }
 });
-=======
+
 app.get('/', (req, res) => {
     res.status(200).json({message: "The server is running"});
 })
 
-app.use('/posts', postRoutes);
-app.use('/comments', commentRoutes);
->>>>>>> main
+// app.use('/posts', postRoutes);
+// app.use('/comments', commentRoutes);
