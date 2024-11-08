@@ -8,8 +8,8 @@ const userDb = require('./models/User');
 const commentDb = require( './models/Comment' );
 const postDb = require( './models/Post' );
 const { generateToken } = require('./config/passport');
-const postRoutes = require('./routes/postRoutes');
-const commentRoutes = require('./routes/commentRoutes');
+// const postRoutes = require('./routes/postRoutes');
+// const commentRoutes = require('./routes/commentRoutes');
 const PORT = 3000;
 
 app.use(express.json()); 
@@ -179,5 +179,6 @@ app.get('/', (req, res) => {
     res.status(200).json({message: "The server is running"});
 })
 
+// If the routes do not work uncomment this
 // app.use('/posts', postRoutes);
 // app.use('/comments', commentRoutes);
